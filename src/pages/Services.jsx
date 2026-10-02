@@ -104,50 +104,55 @@ export default function Services() {
         </div>
       </section>
 
-      {/* 2. SERVICES (Premium Sticky Light Layout) */}
-      <section className="py-24 lg:py-32 px-6 lg:px-12 relative overflow-hidden">
-        {/* Very faint background pattern */}
-        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-50 pointer-events-none z-0"></div>
+      {/* 2. SERVICES (Sticky Sidebar with Scrolling Cards) */}
+      <section className="py-20 lg:py-28 px-6 lg:px-12 relative">
+        {/* Isolated Background Watermark Layer so position:sticky works without ancestor overflow-hidden clipping */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+          {/* Very faint background pattern */}
+          <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-50"></div>
 
-        {/* Faint Background Watermark Icons */}
-        <div className="absolute top-[5%] left-[2%] text-brand-blue/[0.04] transform -rotate-12 pointer-events-none z-0 hidden lg:block">
-          <IndianRupee size={400} strokeWidth={1.5} />
-        </div>
-        <div className="absolute top-[25%] right-[5%] text-brand-green/[0.04] transform rotate-12 pointer-events-none z-0 hidden lg:block">
-          <CreditCard size={350} strokeWidth={1} />
-        </div>
-        <div className="absolute top-[45%] left-[8%] text-brand-yellow-dark/[0.04] transform -rotate-6 pointer-events-none z-0 hidden lg:block">
-          <Smartphone size={300} strokeWidth={1} />
-        </div>
-        <div className="absolute top-[60%] right-[10%] text-brand-blue/[0.04] transform rotate-6 pointer-events-none z-0 hidden lg:block">
-          <Wallet size={300} strokeWidth={1.5} />
-        </div>
-        <div className="absolute top-[75%] left-[5%] text-brand-green/[0.04] transform -rotate-12 pointer-events-none z-0 hidden lg:block">
-          <Receipt size={350} strokeWidth={1} />
-        </div>
-        <div className="absolute bottom-[5%] right-[8%] text-brand-yellow-dark/[0.04] transform rotate-12 pointer-events-none z-0 hidden lg:block">
-          <Plane size={350} strokeWidth={1} />
-        </div>
-        <div className="absolute top-[15%] left-[45%] text-brand-blue/[0.03] transform -rotate-6 pointer-events-none z-0 hidden lg:block">
-          <QrCode size={250} strokeWidth={1} />
+          {/* Faint Background Watermark Icons */}
+          <div className="absolute top-[5%] left-[2%] text-brand-blue/[0.04] transform -rotate-12 hidden lg:block">
+            <IndianRupee size={400} strokeWidth={1.5} />
+          </div>
+          <div className="absolute top-[25%] right-[5%] text-brand-green/[0.04] transform rotate-12 hidden lg:block">
+            <CreditCard size={350} strokeWidth={1} />
+          </div>
+          <div className="absolute top-[45%] left-[8%] text-brand-yellow-dark/[0.04] transform -rotate-6 hidden lg:block">
+            <Smartphone size={300} strokeWidth={1} />
+          </div>
+          <div className="absolute top-[60%] right-[10%] text-brand-blue/[0.04] transform rotate-6 hidden lg:block">
+            <Wallet size={300} strokeWidth={1.5} />
+          </div>
+          <div className="absolute top-[75%] left-[5%] text-brand-green/[0.04] transform -rotate-12 hidden lg:block">
+            <Receipt size={350} strokeWidth={1} />
+          </div>
+          <div className="absolute bottom-[5%] right-[8%] text-brand-yellow-dark/[0.04] transform rotate-12 hidden lg:block">
+            <Plane size={350} strokeWidth={1} />
+          </div>
+          <div className="absolute top-[15%] left-[45%] text-brand-blue/[0.03] transform -rotate-6 hidden lg:block">
+            <QrCode size={250} strokeWidth={1} />
+          </div>
         </div>
 
         <div className="max-w-[1440px] mx-auto relative z-10 flex flex-col lg:flex-row gap-16 lg:gap-24">
 
-          {/* Sticky Left Sidebar */}
-          <div className="w-full lg:w-1/3">
-            <div className="sticky top-32">
-              <h2 className="text-4xl md:text-5xl font-black text-text-main mb-6 tracking-tight">Our Services</h2>
-              <p className="text-text-muted font-medium leading-relaxed mb-8">
-                Explore our full range of 9 core services, engineered specifically to maximize your operational efficiency and margin structure.
-              </p>
-              <div className="hidden lg:flex flex-col gap-4 border-l-2 border-border pl-6">
-                {services.map((s, i) => (
-                  <div key={i} className="text-sm font-bold text-gray-400 hover:text-brand-blue transition-colors cursor-pointer uppercase tracking-wider">
-                    {s.title}
-                  </div>
-                ))}
-              </div>
+          {/* Static / Sticky Left Sidebar */}
+          <div className="w-full lg:w-1/3 lg:sticky lg:top-28 lg:self-start">
+            <h2 className="text-4xl md:text-5xl font-black text-text-main mb-6 tracking-tight">Our Services</h2>
+            <p className="text-text-muted font-medium leading-relaxed mb-8">
+              Explore our full range of 9 core services, engineered specifically to maximize your operational efficiency and margin structure.
+            </p>
+            <div className="hidden lg:flex flex-col gap-4 border-l-2 border-border pl-6">
+              {services.map((s, i) => (
+                <a
+                  key={i}
+                  href={`#service-${i}`}
+                  className="text-sm font-bold text-gray-400 hover:text-brand-blue hover:translate-x-1 transition-all cursor-pointer uppercase tracking-wider block"
+                >
+                  {s.title}
+                </a>
+              ))}
             </div>
           </div>
 
@@ -156,7 +161,8 @@ export default function Services() {
             {services.map((service, idx) => (
               <div
                 key={idx}
-                className="group relative bg-white border border-border shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)] rounded-1xl p-8 lg:p-12 overflow-hidden transition-all duration-500 hover:-translate-y-1"
+                id={`service-${idx}`}
+                className="group relative bg-white border border-border shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)] rounded-1xl p-8 lg:p-12 overflow-hidden transition-all duration-500 hover:-translate-y-1 scroll-mt-28"
               >
                 {/* Hover Glow Effect */}
                 <div className="absolute top-0 right-0 w-64 h-64 bg-brand-green/5 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
